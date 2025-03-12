@@ -29,5 +29,5 @@ jobs:
             docker-compose down || true
 
             echo "Rebuilding and starting containers..."
-            docker-compose up -d --build
+            docker compose up -d --build
 
