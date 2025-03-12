@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+ frontend:
+   build: ./client
+   command: >
+     sh -c "npm run start"
+   volumes:
+     - ./client/src:/fnt_frontend/src
+
+   ports:
+     - "3000:3000"
+  
+
