@@ -1,4 +1,6 @@
-import Providers from "@/components/Providers";
+import Providers from "@/components/providers/Providers";
+import { ThemeProvider } from "@/components/providers/theme-provider"
+import './globals.css';
 
 export default function RootLayout({
   children,
@@ -6,10 +8,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        {/* Wrap only the necessary subtree with client-side providers */}
-        <Providers>{children}</Providers>
+        
+        <Providers>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+          </Providers>
       </body>
     </html>
   );

@@ -1,13 +1,12 @@
-import useSWR, { SWRConfiguration } from 'swr';
+import useSWR from 'swr';
+import { fetchServerData } from '@/lib/serverFetch';
 
-const fetcher = async (url: string) => {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch data: ${res.statusText}`);
-  }
-  return res.json();
-};
+export function useClientData<T>(url: string) {
+  const { data, error, isLoading } = useSWR<T>(url, fetchServerData);
 
-export function useClientData(url: string, config?: SWRConfiguration) {
-  return useSWR(url, fetcher, config);
+  return {
+    data,
+    error,
+    isLoading,
+  };
 }
